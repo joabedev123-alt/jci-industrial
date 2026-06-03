@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0A1F44;
+  --color-secondary: #E60000;
+  --color-accent: #FF2A2A;
+  --color-silver: #E2E8F0;
+  --color-dark: #050B16;
+  --color-surface: rgba(255,255,255,0.05);
+}
+
+:root {
+  --primary: #0A1F44;
+  --secondary: #E60000;
+  --accent: #FF2A2A;
+  --white: #FFFFFF;
+  --silver: #E2E8F0;
+  --dark: #050B16;
+  --surface: rgba(255,255,255,.05);
+}
+
+body {
+  background-color: var(--dark);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, var(--white), var(--silver));
+}
