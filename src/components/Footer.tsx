@@ -23,16 +23,20 @@ export default function Footer() {
             <h5 className="font-bold text-white uppercase tracking-widest mb-6 text-sm">Contato</h5>
             <ul className="space-y-4 text-[#E2E8F0]/80 text-sm font-mono">
               <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer">
-                <Phone className="w-4 h-4 text-[#E60000]" />
-                (92) 3636-6883
+                <Mail className="w-4 h-4 text-[#E60000]" />
+                vendas@jciindustrial.com.br
               </li>
               <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer">
-                <MessageSquare className="w-4 h-4 text-[#E60000]" />
+                <Phone className="w-4 h-4 text-[#E60000]" />
                 (92) 98138-7644
               </li>
               <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer">
-                <Mail className="w-4 h-4 text-[#E60000]" />
-                vendas@jciindustrial.com.br
+                <Phone className="w-4 h-4 text-[#E60000]" />
+                (92) 98443-0276
+              </li>
+              <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer">
+                <Phone className="w-4 h-4 text-[#E60000]" />
+                (92) 98855-8257
               </li>
               <li className="flex items-center gap-3 hover:text-white transition-colors cursor-pointer">
                 <MapPin className="w-4 h-4 text-[#E60000]" />

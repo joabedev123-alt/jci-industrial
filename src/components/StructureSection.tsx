@@ -26,7 +26,7 @@ export default function StructureSection() {
           <div className="w-24 h-[2px] bg-[#E60000] mx-auto" />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4 bg-[#123D8D]/20 p-1 md:p-4 rounded-xl border border-white/5 backdrop-blur-sm">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 bg-[#123D8D]/20 p-2 md:p-4 rounded-xl border border-white/5 backdrop-blur-sm mb-12">
           {items.map((item, i) => (
             <motion.div
               key={i}
@@ -36,17 +36,33 @@ export default function StructureSection() {
               transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
               className="bg-[#0A1F44] border border-[#123D8D]/30 rounded-xl overflow-hidden hover:border-[#E60000] transition-all duration-300 group flex flex-col shadow-lg"
             >
-              <div className="w-full h-24 md:h-32 bg-[#02050A] overflow-hidden flex items-center justify-center">
-                <img src={item.img} alt={item.title} className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              
-              <div className="p-3 md:p-4 flex flex-col items-center text-center gap-2 bg-[#050B16] flex-1 border-t border-[#123D8D]/30">
-                <item.icon className="w-5 h-5 md:w-6 md:h-6 text-[#E60000]" strokeWidth={1.5} />
+              <div className="p-6 flex flex-col items-center justify-center text-center gap-3 bg-[#050B16] flex-1">
+                <item.icon className="w-8 h-8 text-[#E60000] mb-2" strokeWidth={1.5} />
                 <div>
-                  <h3 className="text-white font-bold tracking-wider mb-1 text-xs md:text-sm">{item.title}</h3>
-                  <p className="text-[#E2E8F0] text-[10px] leading-tight font-mono">{item.desc}</p>
+                  <h3 className="text-white font-bold tracking-wider mb-2 text-sm md:text-base">{item.title}</h3>
+                  <p className="text-[#E2E8F0] text-xs leading-relaxed font-mono">{item.desc}</p>
                 </div>
               </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Gallery */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {['01.jpeg', '02.jpeg', '03.jpeg'].map((img, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.2 }}
+              className="rounded-xl overflow-hidden border border-[#123D8D]/30 shadow-2xl group"
+            >
+              <img 
+                src={`/estrutura/${img}`} 
+                alt={`Estrutura ${i + 1}`} 
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" 
+              />
             </motion.div>
           ))}
         </div>
