@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ArrowUpRight } from "lucide-react";
 
 const solutions: Array<{title: string, img: string, subtitle?: string, items: string[], gallery?: string[]}> = [
   {
@@ -19,8 +19,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Correias transportadoras de PVC e Borracha/07.jpeg",
       "/Correias transportadoras de PVC e Borracha/08.jpeg",
       "/Correias transportadoras de PVC e Borracha/09.jpeg",
-      "/Correias transportadoras de PVC e Borracha/10.jpeg"
-    ]
+      "/Correias transportadoras de PVC e Borracha/10.jpeg",
+    ],
   },
   {
     title: "Automação Industrial",
@@ -38,8 +38,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/automação industrial/WhatsApp Image 2026-06-05 at 13.23.04 (4).jpeg",
       "/automação industrial/WhatsApp Image 2026-06-05 at 13.23.04 (5).jpeg",
       "/automação industrial/WhatsApp Image 2026-06-05 at 13.23.04.jpeg",
-      "/automação industrial/WhatsApp Image 2026-06-05 at 13.23.05.jpeg"
-    ]
+      "/automação industrial/WhatsApp Image 2026-06-05 at 13.23.05.jpeg",
+    ],
   },
   {
     title: "Correias transportadoras de borracha e Revestimento de ROLOS de tração",
@@ -52,8 +52,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/correrias transportadoras de borracha e Revestimento de ROLOS de trançao/WhatsApp Image 2026-06-05 at 13.26.13 (1).jpeg",
       "/correrias transportadoras de borracha e Revestimento de ROLOS de trançao/WhatsApp Image 2026-06-05 at 13.26.13.jpeg",
       "/correrias transportadoras de borracha e Revestimento de ROLOS de trançao/WhatsApp Image 2026-06-05 at 13.26.14 (1).jpeg",
-      "/correrias transportadoras de borracha e Revestimento de ROLOS de trançao/WhatsApp Image 2026-06-05 at 13.26.14.jpeg"
-    ]
+      "/correrias transportadoras de borracha e Revestimento de ROLOS de trançao/WhatsApp Image 2026-06-05 at 13.26.14.jpeg",
+    ],
   },
   {
     title: "Vulcanização com prensa a quente!",
@@ -65,8 +65,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Vulcanização com prensa a quente/02.jpeg",
       "/Vulcanização com prensa a quente/03.jpeg",
       "/Vulcanização com prensa a quente/04.jpeg",
-      "/Vulcanização com prensa a quente/05.jpeg"
-    ]
+      "/Vulcanização com prensa a quente/05.jpeg",
+    ],
   },
   {
     title: "Vulcanização à frio em correias transportadoras de borracha",
@@ -82,8 +82,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Vulcanização à frio em correias transportadoras de borracha/06.jpeg",
       "/Vulcanização à frio em correias transportadoras de borracha/07.jpeg",
       "/Vulcanização à frio em correias transportadoras de borracha/08.jpeg",
-      "/Vulcanização à frio em correias transportadoras de borracha/09.jpeg"
-    ]
+      "/Vulcanização à frio em correias transportadoras de borracha/09.jpeg",
+    ],
   },
   {
     title: "Reparos ( Remache) em correias transportadoras",
@@ -95,8 +95,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Reparos ( Remache) em correias transportadoras/02.jpeg",
       "/Reparos ( Remache) em correias transportadoras/03.jpeg",
       "/Reparos ( Remache) em correias transportadoras/04.jpeg",
-      "/Reparos ( Remache) em correias transportadoras/05.jpeg"
-    ]
+      "/Reparos ( Remache) em correias transportadoras/05.jpeg",
+    ],
   },
   {
     title: "Usinagem em geral fabricação de peças de reposição e recuperação",
@@ -107,8 +107,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Usinagem em geral fabricação de peças de reposição e recuperação/WhatsApp Image 2026-06-08 at 13.10.17.jpeg",
       "/Usinagem em geral fabricação de peças de reposição e recuperação/WhatsApp Image 2026-06-08 at 13.10.18 (1).jpeg",
       "/Usinagem em geral fabricação de peças de reposição e recuperação/WhatsApp Image 2026-06-08 at 13.10.18 (2).jpeg",
-      "/Usinagem em geral fabricação de peças de reposição e recuperação/WhatsApp Image 2026-06-08 at 13.10.18.jpeg"
-    ]
+      "/Usinagem em geral fabricação de peças de reposição e recuperação/WhatsApp Image 2026-06-08 at 13.10.18.jpeg",
+    ],
   },
   {
     title: "Montagem Industrial e pintura industrial",
@@ -120,13 +120,13 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Montagem Industrial e pintura industrial/02.jpeg",
       "/Montagem Industrial e pintura industrial/03.jpeg",
       "/Montagem Industrial e pintura industrial/04.jpeg",
-      "/Montagem Industrial e pintura industrial/05.jpeg"
-    ]
+      "/Montagem Industrial e pintura industrial/05.jpeg",
+    ],
   },
   {
     title: "Pintura e jateamento Industrial",
     img: "/Pintura e jateamento Industrial/01.jpeg",
-    subtitle: "Obedecendo todos os critérios da norma NBR7348/2017. Tipos de pintura: Proteção antichamas, dutos e tubulação, equipamentos de alta temperatura, reparo de caixa d’água, tanques, guarda corpo, pisos industriais e pintura civil.",
+    subtitle: "Obedecendo todos os critérios da norma NBR7348/2017. Tipos de pintura: Proteção antichamas, dutos e tubulação, equipamentos de alta temperatura, reparo de caixa d'água, tanques, guarda corpo, pisos industriais e pintura civil.",
     items: ["Pintura Industrial", "Jateamento", "Revestimentos especiais", "Preparação de superfícies"],
     gallery: [
       "/Pintura e jateamento Industrial/01.jpeg",
@@ -137,8 +137,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Pintura e jateamento Industrial/06.jpeg",
       "/Pintura e jateamento Industrial/07.jpeg",
       "/Pintura e jateamento Industrial/08.jpeg",
-      "/Pintura e jateamento Industrial/09.jpeg"
-    ]
+      "/Pintura e jateamento Industrial/09.jpeg",
+    ],
   },
   {
     title: "Serviço de Torqueamento Industrial com mão de obra especializada e equipamentos de alta tecnologia",
@@ -157,8 +157,8 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
       "/Serviço de Torqueamento Industrial com mão de obra especializada e equipamentos de alta tecnologia!/09.jpeg",
       "/Serviço de Torqueamento Industrial com mão de obra especializada e equipamentos de alta tecnologia!/10.jpeg",
       "/Serviço de Torqueamento Industrial com mão de obra especializada e equipamentos de alta tecnologia!/11.jpeg",
-      "/Serviço de Torqueamento Industrial com mão de obra especializada e equipamentos de alta tecnologia!/12.jpeg"
-    ]
+      "/Serviço de Torqueamento Industrial com mão de obra especializada e equipamentos de alta tecnologia!/12.jpeg",
+    ],
   },
   {
     title: "Caldeiraria e serralheria industrial",
@@ -167,26 +167,213 @@ const solutions: Array<{title: string, img: string, subtitle?: string, items: st
     gallery: [
       "/Caldeiraria e serralheria industrial/01.jpeg",
       "/Caldeiraria e serralheria industrial/02.jpeg",
-      "/Caldeiraria e serralheria industrial/03.jpeg"
-    ]
-  }
+      "/Caldeiraria e serralheria industrial/03.jpeg",
+    ],
+  },
 ];
 
+// ── Carrossel interno do card ─────────────────────────────────────────────────
+function CardCarousel({ images, title }: { images: string[]; title: string }) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+    },
+    [images.length]
+  );
+
+  const next = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+    },
+    [images.length]
+  );
+
+  return (
+    <div className="absolute inset-0 w-full h-full">
+      {/* Imagens */}
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={current}
+          src={images[current]}
+          alt={`${title} ${current + 1}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </AnimatePresence>
+
+      {/* Setas – aparecem só no hover do card (via group-hover) */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            aria-label="Anterior"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-[#E60000] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={next}
+            aria-label="Próxima"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-[#E60000] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          {/* Indicadores de ponto */}
+          <div className="absolute bottom-16 left-0 right-0 z-20 flex justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {images.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={(e) => { e.stopPropagation(); setCurrent(idx); }}
+                aria-label={`Ir para imagem ${idx + 1}`}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${idx === current ? "bg-[#E60000] w-4" : "bg-white/50"}`}
+              />
+            ))}
+          </div>
+
+          {/* Contador */}
+          <div className="absolute top-3 right-3 z-20 text-xs text-white/70 bg-black/50 px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {current + 1}/{images.length}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ── Modal de detalhes ─────────────────────────────────────────────────────────
+function DetailsModal({
+  solution,
+  onClose,
+}: {
+  solution: typeof solutions[0];
+  onClose: () => void;
+}) {
+  const [modalImg, setModalImg] = useState(0);
+  const images = solution.gallery ?? [solution.img];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 bg-[#050B16]/90 backdrop-blur-md flex items-center justify-center p-4 md:p-12"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="bg-[#0A1F44] w-full max-w-5xl h-[90vh] sm:h-[85vh] md:h-[600px] flex flex-col md:flex-row relative border border-[#123D8D] rounded-xl overflow-hidden"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 hover:bg-[#E60000] text-white flex items-center justify-center transition-colors rounded-full"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Galeria do modal */}
+        <div className="w-full md:w-1/2 h-52 sm:h-64 md:h-full relative bg-[#050B16] flex flex-col shrink-0">
+          <div className="relative flex-1 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={modalImg}
+                src={images[modalImg]}
+                alt={`${solution.title} ${modalImg + 1}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-full h-full object-cover"
+              />
+            </AnimatePresence>
+            {images.length > 1 && (
+              <>
+                <button onClick={() => setModalImg((c) => (c === 0 ? images.length - 1 : c - 1))} className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-[#E60000] text-white flex items-center justify-center transition-colors">
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button onClick={() => setModalImg((c) => (c === images.length - 1 ? 0 : c + 1))} className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-[#E60000] text-white flex items-center justify-center transition-colors">
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+                <div className="absolute bottom-2 right-3 text-xs text-white/70 bg-black/50 px-2 py-0.5 rounded-full">
+                  {modalImg + 1}/{images.length}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Thumbnails */}
+          {images.length > 1 && (
+            <div className="flex gap-1.5 p-2 overflow-x-auto bg-black/30" style={{ scrollbarWidth: "thin", scrollbarColor: "#E60000 #0A1F44" }}>
+              {images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setModalImg(idx)}
+                  className={`shrink-0 w-14 h-14 rounded overflow-hidden border-2 transition-all ${idx === modalImg ? "border-[#E60000]" : "border-transparent opacity-60 hover:opacity-100"}`}
+                >
+                  <img src={img} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Detalhes textuais */}
+        <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-10 flex flex-col justify-start md:justify-center overflow-y-auto">
+          <div className="text-xs font-mono text-[#E60000] tracking-[0.2em] uppercase mb-4">Detalhes Técnicos</div>
+          <h3 className={`text-2xl md:text-3xl font-bold text-white ${solution.subtitle ? "mb-4" : "mb-8"}`}>{solution.title}</h3>
+          {solution.subtitle && (
+            <p className="text-[#E2E8F0] text-base font-light mb-8 leading-relaxed">{solution.subtitle}</p>
+          )}
+          <ul className="space-y-3 mb-8">
+            {solution.items.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3 border-b border-white/5 pb-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#E60000] mt-2 shrink-0" />
+                <span className="text-[#E2E8F0] text-base">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`https://wa.me/5592981387644?text=Olá, gostaria de solicitar uma cotação sobre ${encodeURIComponent(solution.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-[#E60000] text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-[#0A1F44] transition-colors mt-auto w-max rounded-full inline-block"
+          >
+            Solicitar Cotação
+          </a>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ── Componente principal ──────────────────────────────────────────────────────
 export default function SolutionsSection() {
   const [selectedSolution, setSelectedSolution] = useState<typeof solutions[0] | null>(null);
 
   return (
     <section className="py-32 bg-[#050B16] relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 mb-16 flex flex-col items-center text-center">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 mb-10 sm:mb-16 flex flex-col items-center text-center">
         <div className="flex items-center justify-center gap-4 mb-4">
           <div className="h-[2px] w-12 bg-[#E60000]" />
           <span className="text-[#E60000] uppercase tracking-[0.2em] text-sm font-bold">Portfólio de Soluções</span>
           <div className="h-[2px] w-12 bg-[#E60000]" />
         </div>
-        <h2 className="text-4xl md:text-5xl font-bold">Catálogo <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#E2E8F0]">Industrial</span></h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          Catálogo <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#E2E8F0]">Industrial</span>
+        </h2>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 pb-12 px-6 max-w-[1400px] mx-auto">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 pb-12 px-4 sm:px-6 max-w-[1400px] mx-auto">
         {solutions.map((sol, i) => (
           <motion.div
             key={i}
@@ -194,19 +381,24 @@ export default function SolutionsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.05, duration: 0.5 }}
-            whileHover={{ scale: 0.98 }}
             onClick={() => setSelectedSolution(sol)}
-            className="w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] shrink-0 h-[450px] relative group cursor-pointer bg-[#0A1F44] overflow-hidden rounded-lg border border-white/5 hover:border-[#E60000]/50 transition-colors"
+            className="w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.666rem)] lg:w-[calc(25%-0.75rem)] shrink-0 h-[300px] sm:h-[360px] md:h-[400px] lg:h-[420px] relative group cursor-pointer bg-[#0A1F44] overflow-hidden rounded-xl border border-white/5 hover:border-[#E60000]/50 transition-colors"
           >
-            <img src={sol.img} alt={sol.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-            
-            <div className="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
-              <div>
-                <h3 className="text-xl font-bold text-white max-w-[250px]">{sol.title}</h3>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-[#E60000] flex items-center justify-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shrink-0">
-                <ArrowUpRight className="w-5 h-5 text-white" />
+            {/* Carrossel de imagens */}
+            {sol.gallery && sol.gallery.length > 0 ? (
+              <CardCarousel images={sol.gallery} title={sol.title} />
+            ) : (
+              <img src={sol.img} alt={sol.title} className="absolute inset-0 w-full h-full object-cover" />
+            )}
+
+            {/* Gradiente inferior */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10" />
+
+            {/* Título e botão */}
+            <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full flex justify-between items-end z-10">
+              <h3 className="text-sm sm:text-base md:text-lg font-bold text-white max-w-[200px] sm:max-w-[220px] leading-tight">{sol.title}</h3>
+              <div className="w-9 h-9 rounded-full bg-[#E60000] flex items-center justify-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shrink-0">
+                <ArrowUpRight className="w-4 h-4 text-white" />
               </div>
             </div>
           </motion.div>
@@ -215,72 +407,7 @@ export default function SolutionsSection() {
 
       <AnimatePresence>
         {selectedSolution && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#050B16]/90 backdrop-blur-md flex items-center justify-center p-4 md:p-12"
-          >
-            <motion.div 
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 50, opacity: 0 }}
-              className="bg-[#0A1F44] w-full max-w-5xl h-[80vh] md:h-[600px] flex flex-col md:flex-row relative border border-[#123D8D]"
-            >
-              <button 
-                onClick={() => setSelectedSolution(null)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 hover:bg-[#E60000] text-white flex items-center justify-center transition-colors rounded-full"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden bg-[#050B16]">
-                {selectedSolution.gallery ? (
-                  <div className="grid grid-cols-2 gap-2 p-4 h-full overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#E60000 #0A1F44' }}>
-                    {selectedSolution.gallery.map((img, idx) => (
-                      <div key={idx} className="overflow-hidden rounded-lg">
-                        <img src={img} alt={`${selectedSolution.title} ${idx + 1}`} className="w-full h-32 md:h-48 object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <>
-                    <img src={selectedSolution.img} alt={selectedSolution.title} className="w-full h-full object-cover mix-blend-luminosity" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0A1F44] hidden md:block" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1F44] to-transparent md:hidden" />
-                  </>
-                )}
-              </div>
-
-              <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center overflow-y-auto">
-                <div className="text-xs font-mono text-[#E60000] tracking-[0.2em] uppercase mb-4">Detalhes Técnicos</div>
-                <h3 className={`text-3xl md:text-4xl font-bold text-white ${selectedSolution.subtitle ? 'mb-4' : 'mb-8'}`}>{selectedSolution.title}</h3>
-                {selectedSolution.subtitle && (
-                  <p className="text-[#E2E8F0] text-lg font-light mb-8 leading-relaxed">
-                    {selectedSolution.subtitle}
-                  </p>
-                )}
-                
-                <ul className="space-y-4 mb-8">
-                  {selectedSolution.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-3 border-b border-white/5 pb-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#E60000] mt-2" />
-                      <span className="text-[#E2E8F0] text-lg">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a 
-                  href={`https://wa.me/5592981387644?text=Olá, gostaria de solicitar uma cotação sobre ${encodeURIComponent(selectedSolution.title)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 bg-[#E60000] text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-[#0A1F44] transition-colors mt-auto w-max rounded-full inline-block"
-                >
-                  Solicitar Cotação
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
+          <DetailsModal solution={selectedSolution} onClose={() => setSelectedSolution(null)} />
         )}
       </AnimatePresence>
     </section>
