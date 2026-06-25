@@ -361,7 +361,7 @@ export default function SolutionsSection() {
   const [selectedSolution, setSelectedSolution] = useState<typeof solutions[0] | null>(null);
 
   return (
-    <section className="py-32 bg-[#050B16] relative overflow-hidden">
+    <section id="solucoes" className="py-32 bg-[#050B16] relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 mb-10 sm:mb-16 flex flex-col items-center text-center">
         <div className="flex items-center justify-center gap-4 mb-4">
           <div className="h-[2px] w-12 bg-[#E60000]" />

@@ -11,7 +11,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 bg-[#050B16] relative overflow-hidden">
+    <section id="empresa" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 bg-[#050B16] relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none mix-blend-overlay" />
 
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">

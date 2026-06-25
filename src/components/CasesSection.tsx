@@ -20,7 +20,7 @@ export default function CasesSection() {
   ];
 
   return (
-    <section className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 bg-[#050B16] border-t border-[#123D8D]/20">
+    <section id="cases" className="py-20 sm:py-28 lg:py-32 px-4 sm:px-6 bg-[#050B16] border-t border-[#123D8D]/20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 sm:mb-16">
           <div>

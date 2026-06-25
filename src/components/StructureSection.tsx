@@ -14,7 +14,7 @@ export default function StructureSection() {
   ];
 
   return (
-    <section className="py-20 sm:py-24 px-4 sm:px-6 bg-[#0A1F44] border-y border-[#123D8D]/30 relative overflow-hidden">
+    <section id="estrutura" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#0A1F44] border-y border-[#123D8D]/30 relative overflow-hidden">
       {/* Grid lines decorativas */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 
