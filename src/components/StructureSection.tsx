@@ -50,7 +50,7 @@ export default function StructureSection() {
 
         {/* Galeria de fotos */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-          {["01.jpeg", "02.jpeg", "03.jpeg"].map((img, i) => (
+          {["01.jpeg", "02.jpeg", "04.jpeg"].map((img, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
